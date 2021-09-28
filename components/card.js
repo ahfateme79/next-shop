@@ -1,7 +1,28 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useDispatch, useSelector } from "react-redux";
+import { add } from "../actions";
 
 const Card = ({ product }) => {
+
+  const dispatch = useDispatch()
+  const val=useSelector((state)=>state.add)
+  const addclick = (event) => {
+    dispatch(add())
+
+    let id = event.target.parentElement.children
+    const item = {
+      image: id[0].src,
+      title: id[1].innerHTML,
+      price: id[2].innerHTML
+    }
+
+    let arr = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : []
+    arr.push(item)
+    localStorage.setItem('cart',JSON.stringify(arr))
+    localStorage.setItem('count',arr.length)
+  }
+
   return (
     <>
       {product.map((n) => {
@@ -12,7 +33,7 @@ const Card = ({ product }) => {
             <Link href="/products/[id]" as={`/products/${n.id}`}>
               <a>show details</a>
             </Link>
-            <button> add </button>
+            <button data-id={n.id} onClick={addclick}> add </button>
             <style jsx>
               {`
                 .card{

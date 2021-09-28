@@ -25,7 +25,7 @@ function onAfterChange(value) {
 }
 const Filter = () => {
   return (
-    <>
+    <div className="filter">
       <TreeSelect
         style={{ width: "100%" }}
         dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
@@ -40,7 +40,14 @@ const Filter = () => {
         onChange={onChange}
         onAfterChange={onAfterChange}
       />
-    </>
+      <style jsx>
+        {`
+          .filter{
+            margin:20px 0
+          }
+        `}
+      </style>
+    </div>
   );
 };
 export default Filter;

@@ -11,6 +11,7 @@ const Searchbox = () => {
             enterButton="Search"
             size="large"
         />
-    )       
+    )
+
 }
 export default Searchbox
